@@ -1,7 +1,9 @@
-FROM node:20
+FROM node:20.15.0-alpine3.20
 EXPOSE 8080
 ENV DB_HOST=mysql
-RUN useradd expense
+RUN addgroup -S expense && adduser -S expense -G expense  
+# for alpine OS first we have to create group then after add user
+#RUN useradd expense
 RUN mkdir /app
 RUN chown expense:expense -R /app
 WORKDIR /app
